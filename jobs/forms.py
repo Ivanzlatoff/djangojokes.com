@@ -46,7 +46,7 @@ class JobApplicationForm(forms.Form):
         )
     )
     desired_hourly_wage = forms.DecimalField(
-        widget=forms>NumberInput(
+        widget=forms.NumberInput(
             attrs={'min':'10.00', 'max':'100.00', 'step':'25'}
         )
     )
