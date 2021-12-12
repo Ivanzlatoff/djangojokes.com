@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'jokes.apps.JokesConfig',
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
+    'jobs.apps.JobsConfig',
 ]
 
 MIDDLEWARE = [
