@@ -1,5 +1,4 @@
 from datetime import datetime
-from logging import error
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
@@ -9,6 +8,7 @@ def validate_future_date(value):
         raise ValidationError(
             message=f'{value} is in the past.', code='past_date'
         )
+        
 
 class JobApplicationForm(forms.Form):
     EMPLOYMENT_TYPES = (
