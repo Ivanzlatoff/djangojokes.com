@@ -1,6 +1,5 @@
 from datetime import datetime
 from django import forms
-from django.forms.widgets import NumberInput
 
 class JobApplicationForm(forms.Form):
     EMPLOYMENT_TYPES = (
@@ -40,6 +39,7 @@ class JobApplicationForm(forms.Form):
     )
     available_days = forms.MultipleChoiceField(
         choices=DAYS,
+        coerce=int,
         help_text='Select all days that you can work.',
         widget=forms.CheckboxSelectMultiple(
             attrs={'checked':True}
@@ -47,7 +47,7 @@ class JobApplicationForm(forms.Form):
     )
     desired_hourly_wage = forms.DecimalField(
         widget=forms.NumberInput(
-            attrs={'min':'10.00', 'max':'100.00', 'step':'25'}
+            attrs={'min':'10.00', 'max':'100.00', 'step':'0.25'}
         )
     )
     cover_letter = forms.CharField(
