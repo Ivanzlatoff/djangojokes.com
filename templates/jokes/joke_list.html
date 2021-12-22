@@ -21,10 +21,10 @@
                 </td>
                 <td>
                     {{ joke.category.category }}<br>
-                    {% for tag in jokes.tags.all %}
-                    <span class="badge badge-pill badge-secondary">
-                        {{ tag.tag }}
-                    </span>
+                    {% for tag in joke.tags.all %}
+                        <span class="badge bg-pill bg-dark">
+                            {{ tag.tag }}
+                        </span>
                     {% endfor %}
                 </td>
                 <td>
