@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.messages.api import success
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -30,6 +31,12 @@ class JokeDeleteView(UserPassesTestMixin, DeleteView):
 
 class JokeDetailView(DetailView):
     model = Joke
+    success_url = reverse_lazy('jokes')
+
+    def delete(self, request, *args, **kwargs):
+        result = super().delete(request, *args, **kwargs)
+        messages.success(self.request, 'Joke deleted.')
+        return result
 
 
 class JokeListView(ListView):
