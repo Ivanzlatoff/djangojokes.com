@@ -8,4 +8,5 @@ class AboutUsView(TemplateView):
     template_name = 'pages/about_us.html'
 
 
+
     

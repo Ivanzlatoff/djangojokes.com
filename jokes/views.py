@@ -24,6 +24,11 @@ class JokeDeleteView(UserPassesTestMixin, DeleteView):
     model = Joke
     success_url = reverse_lazy('jokes:list')
 
+    def delete(self, request, *args, **kwargs):
+        result = super().delete(request, *args, **kwargs)
+        messages.success(self.request, 'Joke deleted.')
+        return result
+
     def test_func(self):
         obj = self.get_object()
         return self.request.user == obj.user
@@ -43,7 +48,7 @@ class JokeListView(ListView):
     model = Joke
 
 
-class JokeUpdateView(UserPassesTestMixin, UpdateView):
+class JokeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Joke
     form_class = JokeForm
     success_message = 'Joke updated.'

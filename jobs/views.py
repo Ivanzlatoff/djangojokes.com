@@ -14,7 +14,7 @@ class JobAppView(CreateView):
 
     def form_valid(self, form):
         data = form.cleaned_data
-        to = 'ivanzlatov@aol.com'
+        to = 'ivanzlatoff@gmail.com'
         subject = 'Application for Joke Worker'
         content = f'''<p>Hey HR Manager!</p>
             <p>Job application received:</p>
