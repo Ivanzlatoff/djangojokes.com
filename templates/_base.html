@@ -36,31 +36,46 @@
           <a class="nav-link" href="{% url 'jokes:list' %}">Jokes</a>
         </li>
         {% if not user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
+        </li>
         {% else %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
-              role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Me
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
+            role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Me
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'my-account' %}">
+              My Account
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'my-account' %}">
-                My Account
-              </a>
-              <a class="dropdown-item" href="#">My Django Jokes</a>
-              <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">My Django Jokes</a>
+            <div class="dropdown-divider"></div>
+            <form method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+              <button class="btn dropdown-item">Log out</button>
+            </form>
+          </div>
+        </li> -->
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Me
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'my-account' %}">My Account</a></li>
+            <li><a class="dropdown-item" href="#"><a class="dropdown-item" href="#">My Django Jokes</a></li>
+            <li>
               <form method="post" action="{% url 'account_logout' %}">
                 {% csrf_token %}
                 <button class="btn dropdown-item">Log out</button>
               </form>
-            </div>
-          </li>
+            </li>
+          </ul>
+        </div>
         {% endif %}
       </ul>
       <form class="form-inline my-2 my-lg-0">
