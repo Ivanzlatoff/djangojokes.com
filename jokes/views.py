@@ -78,7 +78,7 @@ def vote(request, slug):
             # User already voted. Get user's past vote:
             joke_vote = JokeVote.objects.get(user=user, joke=joke)
 
-            if joke_vote == vote: # User's new vote is the same as old one
+            if joke_vote.vote == vote: # User's new vote is the same as old one
                 msg = 'Right. You told us already. Geez.'
             else: # User changed vote
                 joke_vote.vote = vote # Update JokeVote instance
@@ -95,7 +95,7 @@ def vote(request, slug):
                     msg = 'Grown on you, has it? OK. Noted.'
         else: # First time user is voting on this joke
             # Create and save vote
-            joke_vote = JokeVote(user=user, vote=vote)
+            joke_vote = JokeVote(user=user, joke=joke, vote=vote)
             joke_vote.save()
 
             # Set data to return to the browser

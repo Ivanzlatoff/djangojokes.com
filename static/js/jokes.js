@@ -8,6 +8,11 @@ window.addEventListener('load', () => {
 })
 
 function register(vote) {
+    if (!isAuthenticated) {
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = 'Sorry, only logged-in users can vote.';
+        return false;
+    }
     const csrfInput = document.querySelector("input[name='csrfmiddlewaretoken']");
     const csrfToken = csrfInput.value;
     const likes = Number(document.getElementById('likes').innerHTML);
@@ -21,7 +26,7 @@ function register(vote) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
+            'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify(data),
     })
@@ -35,7 +40,5 @@ function register(vote) {
         document.getElementById('dislikes').innerHTML = data.dislikes;
         document.getElementById('num-votes').innerHTML = voteText;
     })
-    .catch((error) => {
-        console.log('Error: ', error);
-    });
+    .catch(err => console.log('Error: ', err));
 }
