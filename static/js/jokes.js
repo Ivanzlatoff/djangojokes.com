@@ -8,9 +8,10 @@ window.addEventListener('load', () => {
 })
 
 function register(vote) {
-    const csrfInput = document.querySelector("input[name='csrfmiddlewaretoke']");
+    const csrfInput = document.querySelector("input[name='csrfmiddlewaretoken']");
     const csrfToken = csrfInput.value;
     const likes = Number(document.getElementById('likes').innerHTML);
+    const dislikes = Number(document.getElementById('dislikes').innerHTML);
     const data = {
         'vote': vote,
         'likes': likes,
@@ -33,5 +34,8 @@ function register(vote) {
         document.getElementById('likes').innerHTML = data.likes;
         document.getElementById('dislikes').innerHTML = data.dislikes;
         document.getElementById('num-votes').innerHTML = voteText;
+    })
+    .catch((error) => {
+        console.log('Error: ', error);
     });
 }
