@@ -1,4 +1,5 @@
 import json
+from django.db.models import Q
 from typing import ContextManager
 from django.contrib import messages
 from django.contrib.messages.api import success
@@ -103,6 +104,11 @@ class JokeListView(ListView):
     def get_queryset(self):
         ordering = self.get_ordering()
         qs = Joke.objects.all()
+        if 'q' in self.request.GET: # Filter by searhc query
+            q = self.request.GET.get('q')
+            qs = qs.filter(
+                Q(question__icontains=q) | Q(answer__icontains=q)
+            )
         if 'slug' in self.kwargs: # Filter by category or tag
             slug = self.kwargs['slug']
             if '/category' in self.request.path_info:
@@ -112,7 +118,7 @@ class JokeListView(ListView):
         elif 'username' in self.kwargs: # Filter by joke creator
             username = self.kwargs['username']
             qs = qs.filter(user__username=username)
-        return qs.order_by(ordering)
+        return qs.prefetch_related('category', 'user').order_by(ordering)
 
 
 class JokeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):

@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = [ # Necessary for the Debug Toolbar
+    '127.0.0.1',
+]
+
 
 # Application definition
 
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
 
     # Third-party
     'crispy_forms',
+    'debug_toolbar',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -61,6 +66,7 @@ SITE_ID = 1
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware', # The Debug Toolbar
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
