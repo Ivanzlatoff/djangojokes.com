@@ -68,7 +68,12 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'my-account' %}">My Account</a></li>
-            <li><a class="dropdown-item" href="#"><a class="dropdown-item" href="#">My Django Jokes</a></li>
+            <li>
+              <a class="dropdown-item" 
+                href="{% url 'jokes:creator' user.username %}?order={{ order }}&direction={{ direction }}">
+                My Django jokes
+              </a>
+            </li>
             <li>
               <form method="post" action="{% url 'account_logout' %}">
                 {% csrf_token %}
