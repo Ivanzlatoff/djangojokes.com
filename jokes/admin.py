@@ -26,7 +26,7 @@ class CategoryAdmin(DjangoJokesAdmin):
 class JokeAdmin(DjangoJokesAdmin):
     model = Joke
     list_display = ['question', 'created', 'updated']
-    search_field = ['question', 'answer']
+    search_fields = ['question', 'answer']
     ordering = ['-updated']
     list_filter = ['updated', 'category', 'tags']
     date_hierarchy = 'updated'
