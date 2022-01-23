@@ -54,7 +54,7 @@ class JokeListView(ListView):
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         order_fields, order_key, direction = self.get_order_settings()
         
@@ -104,7 +104,7 @@ class JokeListView(ListView):
     def get_queryset(self):
         ordering = self.get_ordering()
         qs = Joke.objects.all()
-        if 'q' in self.request.GET: # Filter by searhc query
+        if 'q' in self.request.GET: # Filter by search query
             q = self.request.GET.get('q')
             qs = qs.filter(
                 Q(question__icontains=q) | Q(answer__icontains=q)
